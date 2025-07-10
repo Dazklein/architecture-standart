@@ -1,0 +1,28 @@
+﻿@startuml
+
+!include <C4/C4_Context>
+
+Person(User, "Пользователь")
+Person(EmployeeBack, "Сотрудник бэк-офиса")
+Person(EmployeeFront, "Сотрудник фронт-офиса")
+Person(EmployeeCallCenter, "Сотрудник колл-центра")
+
+System(ABC, "АБС - Банковская система")
+System(CRM, "CRM - Система Колл-центра")
+System(InternetBank, "Интернет-банк")
+System(Site, "Сайт")
+System_Ext(SMS, "Телеком-оператор")
+
+Rel(User, InternetBank, "Просматривает счета и доступные депозиты, оставляет заявки")
+Rel(InternetBank, ABC, "Заявка на открытие депозита отправляется в АБС, осуществление платежей")
+Rel(ABC, SMS, "Отправляет СМС")
+
+Rel(EmployeeBack, ABC, "Просматривает заявки и согласовывает заявки")
+
+Rel(User, Site, "Смотрит список депозитов, оставляет заявку на открытие счета или депозита")
+Rel(Site, CRM, "Заявка отправляется в систему колл-центра")
+Rel(EmployeeCallCenter, CRM, "Смотрит заявки и работает с клиентами")
+
+Rel(EmployeeFront, ABC, "Заполняет информацию о пользователе, загружает документы")
+
+@enduml
